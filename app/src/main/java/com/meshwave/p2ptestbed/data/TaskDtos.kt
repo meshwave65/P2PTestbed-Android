@@ -1,7 +1,7 @@
-// app/src/main/java/com/meshwave/p2ptestbed/data/model/TaskDtos.kt
-// VERSÃO 1.0.0 - Modelos de dados para comunicação com a API SOFIA.
+// app/src/main/java/com/meshwave/p2ptestbed/data/TaskDtos.kt
+// VERSÃO 1.0.2 - Remove o campo obsoleto wbs_tag para alinhar com a API.
 
-package com.meshwave.p2ptestbed.data.model
+package com.meshwave.p2ptestbed.data
 
 import com.google.gson.annotations.SerializedName
 
@@ -11,12 +11,11 @@ import com.google.gson.annotations.SerializedName
  */
 data class TaskCreateRequest(
     val description: String,
-    @SerializedName("priority_id") // Garante que o nome no JSON seja "priority_id"
+    @SerializedName("priority_id")
     val priorityId: Int = 1, // Default: Prioridade Normal
     @SerializedName("status_id")
-    val statusId: Int = 1, // Default: Status "Pendente"
-    @SerializedName("wbs_tag")
-    val wbsTag: String = "MobileApp" // Identifica que a tarefa veio do app
+    val statusId: Int = 1 // Default: Status "Pendente"
+    // O campo wbs_tag foi removido.
 )
 
 /**
@@ -30,7 +29,7 @@ data class TaskCreateResponse(
     val status: TaskStatus,
     val priority: TaskPriority,
     @SerializedName("created_at")
-    val createdAt: String // Recebemos como String para simplicidade
+    val createdAt: String
 )
 
 data class TaskStatus(
