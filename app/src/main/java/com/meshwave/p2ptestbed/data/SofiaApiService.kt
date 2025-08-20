@@ -1,11 +1,13 @@
 // app/src/main/java/com/meshwave/p2ptestbed/data/SofiaApiService.kt
-// VERSÃO 1.0.0 - Define os endpoints da API SOFIA para o Retrofit.
+// VERSÃO 1.1.0 - Adiciona o endpoint para buscar os Tópicos de Missão.
 
 package com.meshwave.p2ptestbed.data
 
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 /**
  * Interface que define todos os endpoints da API SOFIA.
@@ -21,7 +23,15 @@ interface SofiaApiService {
     @POST("api/v1/tasks/" )
     suspend fun createTask(@Body taskRequest: TaskCreateRequest): Response<TaskCreateResponse>
 
-    // Futuramente, adicionaremos outros endpoints aqui, como:
-    // @GET("api/v1/tasks/{id}")
-    // suspend fun getTaskStatus(@Path("id") taskId: Int): Response<TaskStatusResponse>
+    // --- [NOVO ENDPOINT ADICIONADO AQUI] ---
+
+    /**
+     * Busca a lista de Tópicos de Missão para um usuário específico.
+     * @param clientId O ID do cliente para o qual buscar os tópicos.
+     * @return Uma resposta que, em caso de sucesso, conterá uma lista de MissionTopicDto.
+     */
+    @GET("api/v1/users/{client_id}/topics")
+    suspend fun getMissionTopics(@Path("client_id") clientId: String): Response<List<MissionTopicDto>>
+
 }
+

@@ -1,5 +1,5 @@
 // app/src/main/java/com/meshwave/p2ptestbed/data/TaskDtos.kt
-// VERSÃO 1.0.2 - Remove o campo obsoleto wbs_tag para alinhar com a API.
+// VERSÃO 1.1.0 - Adiciona o DTO para a lista de Tópicos de Missão.
 
 package com.meshwave.p2ptestbed.data
 
@@ -15,7 +15,6 @@ data class TaskCreateRequest(
     val priorityId: Int = 1, // Default: Prioridade Normal
     @SerializedName("status_id")
     val statusId: Int = 1 // Default: Status "Pendente"
-    // O campo wbs_tag foi removido.
 )
 
 /**
@@ -43,3 +42,21 @@ data class TaskPriority(
     val priorityId: Int,
     val name: String
 )
+
+// --- [NOVO DTO ADICIONADO AQUI] ---
+
+/**
+ * Data Transfer Object (DTO) para receber um item da lista de Tópicos de Missão.
+ * Corresponde ao schema `MissionTopic` da API.
+ */
+data class MissionTopicDto(
+    @SerializedName("task_id")
+    val taskId: Int,
+
+    @SerializedName("task_code")
+    val taskCode: String,
+
+    @SerializedName("task_name")
+    val taskName: String
+)
+
